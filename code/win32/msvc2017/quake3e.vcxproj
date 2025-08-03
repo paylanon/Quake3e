@@ -146,7 +146,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\libcurl\windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;USE_CURL;CURL_STATICLIB;USE_OPENGL_API;USE_VULKAN_API;USE_OGG_VORBIS;USE_WIN32_ASM;$(UseWASAPI);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_WINSOCK_DEPRECATED_NO_WARNINGS;USE_CURL;CURL_STATICLIB;USE_OPENGL_API;USE_VULKAN_API;USE_RENDERER_DLOPEN;RENDERER_PREFIX="quake3e";USE_OGG_VORBIS;USE_WIN32_ASM;$(UseWASAPI);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
@@ -156,7 +156,7 @@
     </ClCompile>
     <ResourceCompile />
     <Link>
-      <AdditionalDependencies>comctl32.lib;winmm.lib;wsock32.lib;ws2_32.lib;crypt32.lib;$(OutDir)$(ConfigurationName)-$(PlatformName)-renderer.lib;..\..\libcurl\windows\vs2017\lib64\libcurl_a_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;winmm.lib;wsock32.lib;ws2_32.lib;crypt32.lib;..\..\libcurl\windows\vs2017\lib64\libcurl_a_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <ProgramDatabaseFile>$(IntDir)quake3e-debug.x64.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>

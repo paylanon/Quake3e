@@ -40,7 +40,7 @@
     <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
@@ -99,7 +99,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\output\</OutDir>
     <IntDir>.\build\$(ProjectName)_$(Configuration)_$(PlatformTarget)\</IntDir>
-    <TargetName>renderer</TargetName>
+    <TargetName>quake3e_opengl_x86_64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>.\output\</OutDir>
@@ -165,7 +165,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_DEPRECATE;USE_RENDERER_DLOPEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
@@ -197,6 +197,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\qcommon\puff.c" />
+    <ClCompile Include="..\..\qcommon\q_math.c" />
+    <ClCompile Include="..\..\qcommon\q_shared.c" />
     <ClCompile Include="..\..\renderer\tr_animation.c" />
     <ClCompile Include="..\..\renderer\tr_arb.c" />
     <ClCompile Include="..\..\renderer\tr_backend.c" />
@@ -230,6 +233,7 @@
     <ClCompile Include="..\..\renderer\tr_world.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\qcommon\puff.h" />
     <ClInclude Include="..\..\qcommon\qcommon.h" />
     <ClInclude Include="..\..\qcommon\qfiles.h" />
     <ClInclude Include="..\..\qcommon\q_shared.h" />
@@ -239,6 +243,14 @@
     <ClInclude Include="..\..\renderer\tr_local.h" />
     <ClInclude Include="..\..\renderercommon\tr_public.h" />
     <ClInclude Include="..\..\renderercommon\tr_types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\asm\common_x64.asm">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Assembling...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

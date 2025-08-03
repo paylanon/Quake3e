@@ -44,7 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -106,7 +106,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\output\</OutDir>
     <IntDir>.\build\$(ProjectName)_$(Configuration)_$(PlatformTarget)\</IntDir>
-    <TargetName>renderer</TargetName>
+    <TargetName>quake3e_vulkan_x86_64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>.\output\</OutDir>
@@ -131,7 +131,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;USE_RENDERER_DLOPEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointExceptions>true</FloatingPointExceptions>
       <BrowseInformation>true</BrowseInformation>
@@ -210,6 +210,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\qcommon\puff.c" />
+    <ClCompile Include="..\..\qcommon\q_math.c" />
+    <ClCompile Include="..\..\qcommon\q_shared.c" />
     <ClCompile Include="..\..\renderercommon\tr_noise.c" />
     <ClCompile Include="..\..\renderervk\tr_animation.c" />
     <ClCompile Include="..\..\renderervk\tr_backend.c" />
@@ -243,12 +246,36 @@
     <ClCompile Include="..\..\renderervk\vk_vbo.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\qcommon\puff.h" />
     <ClInclude Include="..\..\renderervk\iqm.h" />
     <ClInclude Include="..\..\renderervk\tr_common.h" />
     <ClInclude Include="..\..\renderervk\tr_local.h" />
     <ClInclude Include="..\..\renderercommon\tr_public.h" />
     <ClInclude Include="..\..\renderercommon\tr_types.h" />
     <ClInclude Include="..\..\renderervk\vk.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\asm\common_x64.asm">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ml64 /c /Zi /Fo"$(IntDir)%(Filename)%(Extension).obj" "%(FullPath)"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Assembling...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Assembling...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Assembling...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Assembling...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Assembling...</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Assembling...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(Filename)%(Extension).obj;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

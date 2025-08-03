@@ -458,6 +458,9 @@ extern	vec4_t		colorLtGrey;
 extern	vec4_t		colorMdGrey;
 extern	vec4_t		colorDkGrey;
 
+// limboquake pallette
+extern	vec4_t		colorLqMahogany;
+
 #define Q_COLOR_ESCAPE	'^'
 #define Q_IsColorString(p) ( *(p) == Q_COLOR_ESCAPE && *((p)+1) && *((p)+1) != Q_COLOR_ESCAPE )
 

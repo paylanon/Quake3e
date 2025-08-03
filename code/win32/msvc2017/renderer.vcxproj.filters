@@ -104,6 +104,15 @@
     <ClCompile Include="..\..\renderer\tr_world.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\qcommon\q_math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\qcommon\q_shared.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\qcommon\puff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\qcommon\q_shared.h">
@@ -133,5 +142,13 @@
     <ClInclude Include="..\..\renderercommon\tr_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\qcommon\puff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\asm\common_x64.asm">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

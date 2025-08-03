@@ -47,6 +47,9 @@ vec4_t		colorLtGrey	= {0.75, 0.75, 0.75, 1};
 vec4_t		colorMdGrey	= {0.5, 0.5, 0.5, 1};
 vec4_t		colorDkGrey	= {0.25, 0.25, 0.25, 1};
 
+// limboquake palette
+vec4_t		colorLqMahogany = { 0.2, 0.17, 0.16, 1 };
+
 // actually there are 35 colors but we want to use bitmask safely
 const vec4_t g_color_table[ 64 ] = {
 
